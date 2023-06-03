@@ -8,11 +8,15 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
+// SRC
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
-import { ApiTagsAndBearer } from '../../libs/core/src/docs/swagger.decorator';
-import { AuthGuard } from '@nestjs/passport';
+
+// CORE
+import { ApiTagsAndBearer } from '@core/docs/swagger.decorator';
 
 @ApiTagsAndBearer('Comments')
 @Controller('comments')

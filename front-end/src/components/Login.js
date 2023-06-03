@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AuthService from "../service/AuthService";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -12,28 +13,18 @@ export const Login = () => {
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       const resp = await axios.post("http://localhost:5000/auth/login", user);
+      localStorage.setItem("accessToken", resp.data.accessToken);
+      localStorage.setItem("user", JSON.stringify(resp.data.user));
 
-      if (resp.data.isAdmin) {
-        navigate("/admin", {
-          state: {
-            userId: resp.data.id,
-            email: email,
-            cartId: resp.data.cartId,
-            isAdmin: resp.data.isAdmin,
-          },
-        });
+      if (resp.data.user.isAdmin) {
+        navigate("/admin");
       } else {
-        navigate("/home", {
-          state: {
-            userId: resp.data.id,
-            email: email,
-            cartId: resp.data.cartId,
-          },
-        });
+        navigate("/home");
       }
     } catch (error) {
       alert("Your email/password do not match. Please try again!");

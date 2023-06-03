@@ -72,12 +72,12 @@ export const Invoice = () => {
   };
   return (
     <div>
-      <Navbar isAdmin={isAdmin} cartId={cartId} userId={userId} email={email} />
+      <Navbar />
       <div className="mt-3">
         {data.map((item, index) => {
           return (
             <div>
-              Ngày mua: {dateFormat(item.create_at, "dd/mm/yyyy")}
+              Ngày mua: {dateFormat(item.createdAt, "dd/mm/yyyy")}
               <table className="table-auto ml-auto mr-auto mb-4">
                 <thead>
                   <tr>

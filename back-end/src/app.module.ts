@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { BooksModule } from './books/books.module';
+import { SneakersModule } from './sneakers/sneakers.module';
 import { UsersModule } from './users/users.module';
 import { configEnvPath } from './common/helper/env.helper';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -16,6 +16,8 @@ import { InvoicesModule } from './invoices/invoices.module';
 import { CartItemsModule } from './cart-items/cart-items.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtStrategy } from './auth/strategies/jwt.strategy';
+import { BrandsModule } from './brands/brands.module';
+import { ProductTypesModule } from './product-types/product-types.module';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
     MulterModule.register({
       dest: './files',
     }),
-    BooksModule,
+    SneakersModule,
     UsersModule,
     ImagesModule,
     CommentsModule,
@@ -33,6 +35,8 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
     InvoicesModule,
     CartItemsModule,
     AuthModule,
+    BrandsModule,
+    ProductTypesModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

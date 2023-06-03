@@ -122,7 +122,7 @@ export const Cart = () => {
 
   return (
     <div>
-      <Navbar cartId={cartId} userId={userId} email={email} isAdmin={isAdmin} />
+      <Navbar />
       <table className="table-auto ml-auto mr-auto mt-10">
         <thead>
           <tr>

@@ -8,7 +8,6 @@ export const Navbar = (props) => {
   const email = props.email;
   const isAdmin = props.isAdmin;
 
-  console.log("in narba: ", cartId, " ", userId, " ", email);
   const handlerCartBtn = () => {
     navigate("/home/cart", {
       state: {
@@ -42,7 +41,7 @@ export const Navbar = (props) => {
   };
 
   return (
-    <div className="sticky top-0 z-10">
+    <div className="sticky top-0 z-10 shadow-xl">
       <nav className="bg-slate-50 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
         <div className="container flex flex-wrap items-center justify-between mx-auto ml-64">
           <a href=" " onClick={homeNavigate} className="flex items-center">

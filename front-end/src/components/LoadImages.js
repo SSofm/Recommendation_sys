@@ -1,3 +1,1 @@
-export const LoadImage = () => {
-    
-}
+export const LoadImage = () => {};

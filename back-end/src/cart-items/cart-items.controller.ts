@@ -7,10 +7,15 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+
+// SRC
 import { CartItemsService } from './cart-items.service';
 import { CreateCartItemDto } from './dto/create-cart-item.dto';
 import { UpdateCartItemDto } from './dto/update-cart-item.dto';
-import { ApiTagsAndBearer } from '../../libs/core/src/docs/swagger.decorator';
+
+// CORE
+import { ApiTagsAndBearer } from '@core/docs/swagger.decorator';
+
 @ApiTagsAndBearer('Cart items')
 @Controller('cart-items')
 export class CartItemsController {

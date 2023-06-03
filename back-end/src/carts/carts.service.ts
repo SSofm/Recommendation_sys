@@ -1,9 +1,11 @@
 import { Injectable, forwardRef, Inject } from '@nestjs/common';
-// import { UpdateCartDto } from './dto/update-cart.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
+// SRC
+// import { UpdateCartDto } from './dto/update-cart.dto';
 import { Cart } from './entities/cart.entity';
-import { BooksService } from '../books/books.service';
+import { SneakersService } from '../sneakers/sneakers.service';
 import { CreateCartDto } from './dto/create-cart.dto';
 
 @Injectable()
@@ -11,8 +13,8 @@ export class CartsService {
   constructor(
     @InjectRepository(Cart)
     private readonly cartRepository: Repository<Cart>,
-    @Inject(forwardRef(() => BooksService))
-    private booksService: BooksService,
+    @Inject(forwardRef(() => SneakersService))
+    private booksService: SneakersService,
   ) {}
   create() {
     const cart = new Cart();

@@ -6,8 +6,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+// SRC
 import { User } from '../../users/entities/user.entity';
-import { Book } from '../../books/entities/book.entity';
+import { Sneaker } from '../../sneakers/entities/sneaker.entity';
+
 @Entity()
 export class Comment {
   @PrimaryGeneratedColumn()
@@ -25,10 +28,10 @@ export class Comment {
   })
   user: User;
 
-  @ManyToOne(() => Book, (book) => book.comments, {
+  @ManyToOne(() => Sneaker, (book) => book.comments, {
     onDelete: 'SET NULL',
   })
-  book: Book;
+  book: Sneaker;
 
   @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;

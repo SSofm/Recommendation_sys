@@ -1,11 +1,13 @@
 import { Injectable, Inject, forwardRef } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+// SRC
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Comment } from './entities/comment.entity';
-import { Repository } from 'typeorm';
-import { BooksService } from '../books/books.service';
-import { Book } from '../books/entities/book.entity';
+import { SneakersService } from '../sneakers/sneakers.service';
+import { Sneaker } from '../sneakers/entities/sneaker.entity';
 import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
 
@@ -14,15 +16,15 @@ export class CommentsService {
   constructor(
     @InjectRepository(Comment)
     private readonly commentRepository: Repository<Comment>,
-    @Inject(forwardRef(() => BooksService))
-    private booksService: BooksService,
+    @Inject(forwardRef(() => SneakersService))
+    private booksService: SneakersService,
 
     @Inject(forwardRef(() => UsersService))
     private usersService: UsersService,
   ) {}
 
   async create(bookId: number, createCommentDto: CreateCommentDto) {
-    const book: Book = await this.booksService.findOne(bookId);
+    const book: Sneaker = await this.booksService.findOne(bookId);
     const user: User = await this.usersService.findOne(createCommentDto.userId);
     const dummy_comment = {
       content: createCommentDto.content,

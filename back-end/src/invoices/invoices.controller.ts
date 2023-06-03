@@ -7,10 +7,15 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+
+// SRC
 import { InvoicesService } from './invoices.service';
 import { CreateInvoiceDto } from './dto/create-invoice.dto';
 import { UpdateInvoiceDto } from './dto/update-invoice.dto';
-import { ApiTagsAndBearer } from '../../libs/core/src/docs/swagger.decorator';
+
+// CORE
+import { ApiTagsAndBearer } from '@core/docs/swagger.decorator';
+
 @ApiTagsAndBearer('Invoices')
 @Controller('invoices')
 export class InvoicesController {

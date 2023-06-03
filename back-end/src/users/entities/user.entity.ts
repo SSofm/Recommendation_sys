@@ -5,6 +5,8 @@ import {
   OneToMany,
   OneToOne,
   JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Comment } from '../../comments/entities/comment.entity';
 import { Cart } from '../../carts/entities/cart.entity';
@@ -47,6 +49,15 @@ export class User {
   })
   @JoinColumn()
   cart: Cart;
+
+  @Column({ nullable: true, default: null })
+  avatar: string;
+
+  @CreateDateColumn({ type: 'timestamptz' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamptz' })
+  updatedAt: Date;
 
   comparePassword(rawPassword: string): boolean {
     const userPassword = this.password;

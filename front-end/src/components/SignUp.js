@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
-  const url = "http://localhost:5000/users/";
+  const url = "http://localhost:5000/auth/";
   let navigate = useNavigate();
   const [user, setUser] = useState({
     username: "",
@@ -21,7 +21,7 @@ export const SignUp = () => {
       await axios.post(`${url}register`, user);
       navigate("/users/login");
     } catch (error) {
-      alert("Sorry, that username already exits!");
+      alert("Sorry, that email already exits!");
     }
   };
   return (
@@ -68,7 +68,7 @@ export const SignUp = () => {
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               id="inline-age"
               name="age"
-              type="text"
+              type="number"
               required
               value={age}
               onChange={(e) => onInputChange(e)}
@@ -91,7 +91,7 @@ export const SignUp = () => {
               name="email"
               required
               value={email}
-              type="text"
+              type="email"
               onChange={(e) => onInputChange(e)}
             />
           </div>
@@ -107,6 +107,7 @@ export const SignUp = () => {
           </div>
           <div className="md:w-2/3">
             <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               id="inline-password"
               name="password"

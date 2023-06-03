@@ -6,13 +6,16 @@ import {
   forwardRef,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
+
+// SRC
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
 import { UserCredentialDto } from './dto/UserCredentialDto';
 import { CartsService } from '../carts/carts.service';
-import * as bcrypt from 'bcrypt';
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -23,6 +26,7 @@ export class UsersService {
     private cartsService: CartsService,
   ) {}
   async create(createUserDto: CreateUserDto) {
+    createUserDto.email = createUserDto.email.toLowerCase();
     const exitsUser = await this.userRepository.findOneBy({
       email: createUserDto.email,
     });

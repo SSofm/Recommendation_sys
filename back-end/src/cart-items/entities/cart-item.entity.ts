@@ -1,11 +1,13 @@
-import { Book } from './../../books/entities/book.entity';
+import { Sneaker } from '../../sneakers/entities/sneaker.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Cart } from '../../carts/entities/cart.entity';
 import { Invoice } from '../../invoices/entities/invoice.entity';
@@ -30,8 +32,14 @@ export class CartItem {
   })
   invoice: Invoice;
 
-  @ManyToOne(() => Book, (book) => book.cartItems, {
+  @ManyToOne(() => Sneaker, (sneaker) => sneaker.cartItems, {
     onDelete: 'SET NULL',
   })
-  book: Book;
+  sneaker: Sneaker;
+
+  @CreateDateColumn({ type: 'timestamptz' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamptz' })
+  updatedAt: Date;
 }

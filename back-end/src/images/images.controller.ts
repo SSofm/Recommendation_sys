@@ -9,30 +9,48 @@ import {
   UseInterceptors,
   UploadedFiles,
 } from '@nestjs/common';
+import { ApiConsumes } from '@nestjs/swagger';
+import { FilesInterceptor } from '@nestjs/platform-express';
+
+// SRC
 import { ImagesService } from './images.service';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
-import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { imageFileFilter } from './FileFilter';
 import { editFileName } from './EditFileName';
-import { ApiTagsAndBearer } from '../../libs/core/src/docs/swagger.decorator';
+
+// CORE
+import {
+  ApiCreateOperation,
+  ApiListOperation,
+  ApiRetrieveOperation,
+  ApiTagsAndBearer,
+  ApiUpdateOperation,
+} from '@core/docs/swagger.decorator';
+
 @ApiTagsAndBearer('Images')
 @Controller('images')
 export class ImagesController {
   constructor(private readonly imagesService: ImagesService) {}
 
   @Post('create-new-image')
+  @ApiCreateOperation({
+    summary: 'Create new image',
+  })
   create(@Body() createImageDto: CreateImageDto) {
     return this.imagesService.create(createImageDto);
   }
 
-  @Post('updated-images-for-book/:bookId')
+  @Post('updated-images-for-sneaker/:sneakerId')
+  @ApiUpdateOperation({
+    summary: 'Update image for sneaker',
+  })
   updatedCoverImages(
-    @Param('bookId') bookId: number,
+    @Param('sneakerId') sneakerId: number,
     @Body() listImageUrls: string[],
   ) {
-    return this.imagesService.updatedCoverImages(bookId, listImageUrls);
+    return this.imagesService.updatedCoverImages(sneakerId, listImageUrls);
   }
 
   @Post('upload-files')
@@ -45,7 +63,8 @@ export class ImagesController {
       fileFilter: imageFileFilter,
     }),
   )
-  handleUpload(@UploadedFiles() files: Array<Express.Multer.File>) {
+  @ApiConsumes('multipart/form-data')
+  handleUpload(@UploadedFiles() files: Array<Express.Multer.File>): string[] {
     const listImagePaths: string[] = [];
     for (const element of files) {
       listImagePaths.push(element.path);
@@ -54,11 +73,15 @@ export class ImagesController {
   }
 
   @Get()
+  @ApiListOperation({
+    summary: 'Get all image',
+  })
   findAll() {
     return this.imagesService.findAll();
   }
 
   @Get(':id')
+  @ApiRetrieveOperation()
   findOne(@Param('id') id: string) {
     return this.imagesService.findOne(+id);
   }

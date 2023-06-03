@@ -4,9 +4,14 @@ import {
   Column,
   OneToMany,
   ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
+
+// SRC
 import { CartItem } from '../../cart-items/entities/cart-item.entity';
 import { User } from '../../users/entities/user.entity';
+
 @Entity()
 export class Invoice {
   @PrimaryGeneratedColumn()
@@ -20,6 +25,9 @@ export class Invoice {
   @ManyToOne(() => User, (user) => user.invoices)
   user: User;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  create_at: Date;
+  @CreateDateColumn({ type: 'timestamptz' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamptz' })
+  updatedAt: Date;
 }

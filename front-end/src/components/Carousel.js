@@ -36,10 +36,9 @@ export const Carousel = () => {
     // const isLastSlide = currentIndex === slides.length - 1;
     // const newIndex = isLastSlide ? 0 : currentIndex + 1;
     // setCurrentIndex(newIndex);
-    
+
     count = (count + 1) % slides.length;
     setCurrentIndex(count);
-    
   };
 
   const goToSlide = (slideIndex) => {

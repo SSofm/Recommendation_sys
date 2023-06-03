@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   HttpException,
   HttpStatus,
   Injectable,
@@ -8,15 +7,14 @@ import {
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 
-// SHARE
-import {
-  IResponseLogin,
-  IUser,
-} from '../../libs/share/src/interfaces/user/user.interface';
-import { LoginAuthDto } from '../../libs/share/src/dtos/users/login.dto';
+// SRC
 import { User } from '../users/entities/user.entity';
 import { TokenService } from '../users/services/token.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+
+// SHARED
+import { IResponseLogin } from '@shared/interfaces/user/user.interface';
+import { LoginAuthDto } from '@shared/dtos/users/login.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -32,7 +30,7 @@ export class AuthService {
   }
   async login(loginDto: LoginAuthDto) {
     const { email, password } = loginDto;
-    const user = await this.usersService.checkUser(email);
+    const user = await this.usersService.checkUser(email.toLowerCase());
     if (!user || !user.comparePassword(password))
       throw new UnauthorizedException('Invalid username or password');
     const isPasswordValid: boolean = await this.isPasswordValid(

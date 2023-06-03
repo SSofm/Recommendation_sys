@@ -1,5 +1,4 @@
 export const Footer = (props) => {
-  console.log("in footer: ", props.posFooter);
   const par = "relative";
   const child = "fixed bottom-0 w-full";
   return (
@@ -17,18 +16,22 @@ export const Footer = (props) => {
             BÀI THI KẾT THÚC HỌC PHẦN
           </h5>
           <h5 className="font-medium leading-tight text-lg text-indigo-50">
-            HỌC PHẦN: LẬP TRÌNH WEB
+            HỌC PHẦN: KHAI PHÁ DỮ LIỆU ĐA PHƯƠNG TIỆN
           </h5>
           <hr className="mx-auto w-[1695px] h-[0.3px] bg-gray-200 rounded border-0 md:my-7 dark:bg-gray-700" />
           <table className="text-indigo-50 ml-auto mr-auto text-lg">
             <tbody>
               <tr>
-                <th className="text-right">Sinh viên thực hiện</th>
-                <td className="text-left pl-10">Nguyễn Văn Sang</td>
+                <th className="text-right">Đề tài:</th>
+                <td className="text-left pl-10">Recommendation System</td>
               </tr>
               <tr>
-                <th className="text-right">Mã sinh viên</th>
-                <td className="text-left pl-10">B19DCPT190</td>
+                <th className="text-right">Giảng viên hướng dẫn:</th>
+                <td className="text-left pl-10">Đỗ Thị Liên</td>
+              </tr>
+              <tr>
+                <th className="text-right">Nhóm thực hiện</th>
+                <td className="text-left pl-10">09</td>
               </tr>
               <tr>
                 <th className="text-right">Lớp</th>

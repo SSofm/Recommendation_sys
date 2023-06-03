@@ -8,10 +8,15 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
+// SRC
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiTagsAndBearer } from '../../libs/core/src/docs/swagger.decorator';
-import { AuthGuard } from '@nestjs/passport';
+
+// CORE
+import { ApiTagsAndBearer } from '@core/docs/swagger.decorator';
+
 @ApiTagsAndBearer('Users')
 @Controller('users')
 @UseGuards(AuthGuard('jwt'))

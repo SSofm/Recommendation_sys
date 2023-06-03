@@ -1,12 +1,17 @@
 import { Module, forwardRef } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+// SRC
 import { ImagesService } from './images.service';
 import { ImagesController } from './images.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { Image } from './entities/image.entity';
-import { BooksModule } from '../books/books.module';
+import { SneakersModule } from '../sneakers/sneakers.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Image]), forwardRef(() => BooksModule)],
+  imports: [
+    TypeOrmModule.forFeature([Image]),
+    forwardRef(() => SneakersModule),
+  ],
   controllers: [ImagesController],
   providers: [ImagesService],
   exports: [ImagesService],
